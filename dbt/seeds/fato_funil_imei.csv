@@ -1,0 +1,4 @@
+data_referencia,uf,fonte,total_bo,total_celulares,imei_invalido,imei_valido,recuperados,roubados_furtados,encontrados_api_cellseg,recuperados_api,roufur_api,bloqueados_operadora
+2026-05-25,BR,Distintos,1011207,5441717,2072139,3369578,272632,3096946,952349,39433,899623,180526
+2026-05-25,SP,Distintos,1435,1363211,296982,1066229,116,1066113,26,1,25,19
+2026-05-25,PI,Distintos,80421,111074,235,110839,41071,69768,85089,14989,66959,5903

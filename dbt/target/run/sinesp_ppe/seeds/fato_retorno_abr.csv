@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "sinesp_ppe"."staging"."fato_retorno_abr";
+    -- dbt seed --
+    
+          insert into "sinesp_ppe"."staging"."fato_retorno_abr" ("data_referencia", "operadora", "uf", "imeis_consultados", "imeis_ativos", "bloqueios_solicitados", "bloqueios_efetivados", "prazo_medio_dias") values
+          (%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s)
+      
+
+;
+  

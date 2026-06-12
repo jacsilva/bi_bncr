@@ -1,0 +1,14 @@
+# Pipeline / dbt
+python-dotenv
+JayDeBeApi
+httpx
+psycopg2-binary
+dbt-core==1.9.*
+dbt-postgres==1.9.*
+
+# API
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+requests

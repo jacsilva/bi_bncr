@@ -1,0 +1,28 @@
+# Segredos e credenciais
+.env
+
+# Artefatos sensíveis de configuração
+config/*.jks
+config/*.jar
+
+# Saída gerada
+output/
+*.json
+
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp

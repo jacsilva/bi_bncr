@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "sinesp_ppe"."staging"."dim_operadora";
+    -- dbt seed --
+    
+          insert into "sinesp_ppe"."staging"."dim_operadora" ("codigo", "operadora", "grupo", "ativa") values
+          (%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s)
+      
+
+;
+  

@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "sinesp_ppe"."staging"."fato_integracao_bncr";
+    -- dbt seed --
+    
+          insert into "sinesp_ppe"."staging"."fato_integracao_bncr" ("uf", "fase", "data_entrada_fase", "processo_sei", "ponto_focal", "observacao") values
+          (%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s)
+      
+
+;
+  

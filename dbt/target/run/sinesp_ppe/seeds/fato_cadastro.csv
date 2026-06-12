@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "sinesp_ppe"."staging"."fato_cadastro";
+    -- dbt seed --
+    
+          insert into "sinesp_ppe"."staging"."fato_cadastro" ("data", "uf", "cadastros_recebidos", "dispositivos_vinculados") values
+          (%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s)
+      
+
+;
+  

@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "sinesp_ppe"."staging"."fato_funil_imei";
+    -- dbt seed --
+    
+          insert into "sinesp_ppe"."staging"."fato_funil_imei" ("data_referencia", "uf", "fonte", "total_bo", "total_celulares", "imei_invalido", "imei_valido", "recuperados", "roubados_furtados", "encontrados_api_cellseg", "recuperados_api", "roufur_api", "bloqueados_operadora") values
+          (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+      
+
+;
+  

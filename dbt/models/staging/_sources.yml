@@ -1,0 +1,15 @@
+version: 2
+
+# Fonte bruta: tabela populada pelo pipeline Python (src/database.py).
+sources:
+  - name: sinesp_ppe
+    schema: public
+    tables:
+      - name: procedimento
+        description: "Procedimentos do Sinesp PPe (registro completo em JSONB)."
+        columns:
+          - name: id_procedimento
+            description: "Identificador do procedimento."
+            tests:
+              - unique
+              - not_null

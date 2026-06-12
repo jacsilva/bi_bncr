@@ -1,0 +1,83 @@
+name: 'sinesp_ppe'
+version: '1.0.0'
+config-version: 2
+
+# Perfil de conexão (ver profiles.yml)
+profile: 'sinesp_ppe'
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+# Arquitetura medallion: cada camada em seu próprio schema, com prefixo de tabela.
+# staging/intermediate são views; a camada smart é materializada como tabela.
+models:
+  sinesp_ppe:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    smart:
+      +schema: smart
+      +materialized: table
+
+# Seeds (dados de referência estáticos carregados via `dbt seed`).
+seeds:
+  sinesp_ppe:
+    +schema: staging
+    dim_uf:
+      +column_types:
+        uf: char(2)
+        nome: text
+        regiao: text
+        meio_envio: text
+        obs: text
+    dim_operadora:
+      +column_types:
+        codigo: text
+        operadora: text
+        grupo: text
+        ativa: char(1)
+    # Fatos (landing das planilhas/abas): apenas colunas-base; colunas-fórmula
+    # são calculadas nas camadas int_/smt_.
+    fato_funil_imei:
+      +column_types:
+        data_referencia: date
+        uf: char(2)
+        fonte: text
+        total_bo: bigint
+        total_celulares: bigint
+        imei_invalido: bigint
+        imei_valido: bigint
+        recuperados: bigint
+        roubados_furtados: bigint
+        encontrados_api_cellseg: bigint
+        recuperados_api: bigint
+        roufur_api: bigint
+        bloqueados_operadora: bigint
+    fato_retorno_abr:
+      +column_types:
+        data_referencia: date
+        operadora: text
+        uf: char(2)
+        imeis_consultados: bigint
+        imeis_ativos: bigint
+        bloqueios_solicitados: bigint
+        bloqueios_efetivados: bigint
+        prazo_medio_dias: numeric
+    fato_integracao_bncr:
+      +column_types:
+        uf: char(2)
+        fase: text
+        data_entrada_fase: date
+        processo_sei: text
+        ponto_focal: text
+        observacao: text
+    fato_cadastro:
+      +column_types:
+        data: date
+        uf: char(2)
+        cadastros_recebidos: bigint
+        dispositivos_vinculados: bigint

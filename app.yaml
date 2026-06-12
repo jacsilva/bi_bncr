@@ -1,0 +1,14 @@
+command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "$DATABRICKS_APP_PORT"]
+env:
+  - name: API_KEY
+    valueFrom: api-key-secret
+resources:
+  - name: api-key-secret
+    secret:
+      scope: "bi-nbcr-secrets"
+      key: "api-key"
+  - name: postgres
+    postgres:
+      branch: projects/bnbo2/branches/production
+      database: projects/bnbo2/branches/production/databases/db-3s9f-s58q0wwfo3
+      permission: CAN_CONNECT_AND_CREATE
