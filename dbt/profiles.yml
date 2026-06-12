@@ -1,14 +1,15 @@
 # Perfil de conexão do dbt. Lê as mesmas variáveis do .env do projeto.
 # Schema default = staging (conforme solicitado).
-sinesp_ppe:
-  target: dev
+bi_bnbo:
+  target: prod
   outputs:
-    dev:
+    prod:
       type: postgres
       host: "{{ env_var('PGHOST') }}"
       port: "{{ env_var('PGPORT') | int }}"
       user: "{{ env_var('PGUSER') }}"
-      password: "{{ env_var('POSTGRES_PASSWORD') }}"
-      dbname: "{{ env_var('PGDATABASENAME', 'databricks-postgres') }}"
-      schema: "{{ env_var('POSTGRES_SCHEMA', 'public') }}"
+      password: "{{ env_var('PGPASSWORD') }}"
+      dbname: "{{ env_var('PGDATABASE', 'databricks-postgres') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'public') }}"
       threads: 4
+      sslmode: require
