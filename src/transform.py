@@ -25,19 +25,26 @@ def _ensure_pgpassword():
     # Ambiente Databricks Apps: o resource injeta as credenciais do service
     # principal (DATABRICKS_CLIENT_ID). Gera o token OAuth a cada execução.
     if os.environ.get("DATABRICKS_CLIENT_ID"):
-        from databricks.sdk import WorkspaceClient
+        import requests as _requests
 
-        w = WorkspaceClient()
-        # ✅ Usar PGDATABASE injetado pelo Lakebase (databricks-postgres com hífen)
-        cred = w.database.generate_database_credential(
-            request_id=str(uuid.uuid4()),
-            instance_names=["databricks-postgres"]
+        db_host = os.environ["DATABRICKS_HOST"]
+        client_id = os.environ["DATABRICKS_CLIENT_ID"]
+        client_secret = os.environ["DATABRICKS_CLIENT_SECRET"]
+
+        resp = _requests.post(
+            f"https://{db_host}/oidc/v1/token",
+            data={
+                "grant_type": "client_credentials",
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "scope": "all-apis",
+            },
         )
-        os.environ["PGPASSWORD"] = cred.token
+        resp.raise_for_status()
+        os.environ["PGPASSWORD"] = resp.json()["access_token"]
         return
 
-    # Ambiente local: usa a senha estática do Postgres do .env, se PGPASSWORD
-    # ainda não estiver definido.
+    # Local: usa senha estática do .env
     if not os.environ.get("PGPASSWORD") and os.environ.get("POSTGRES_PASSWORD"):
         os.environ["PGPASSWORD"] = os.environ["POSTGRES_PASSWORD"]
 
