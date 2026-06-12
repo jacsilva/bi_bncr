@@ -68,11 +68,11 @@ else:
 
     DATABASE_URL = os.getenv("DATABASE_URL")
     if not DATABASE_URL:
-        pg_user = os.getenv("POSTGRES_USER", "sinesp")
+        pg_user = os.getenv("PGUSER", "sinesp")
         pg_pass = os.getenv("POSTGRES_PASSWORD", "")
-        pg_host = os.getenv("POSTGRES_HOST", "localhost")
-        pg_port = os.getenv("POSTGRES_PORT", "5432")
-        pg_db = os.getenv("POSTGRES_DB", "sinesp_ppe")
+        pg_host = os.getenv("PGHOST", "localhost")
+        pg_port = os.getenv("PGPORT", "5432")
+        pg_db = os.getenv("PGDATABASE", "sinesp_ppe")
         DATABASE_URL = (
             f"postgresql+psycopg2://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}"
         )

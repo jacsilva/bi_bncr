@@ -11,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 PG_CONFIG = {
-    "host": os.getenv("POSTGRES_HOST", "localhost"),
-    "port": os.getenv("POSTGRES_PORT", "5432"),
-    "dbname": os.getenv("POSTGRES_DB", "sinesp_ppe"),
-    "user": os.getenv("POSTGRES_USER", "sinesp"),
+    "host": os.getenv("PGHOST", "localhost"),
+    "port": os.getenv("PGPORT", "5432"),
+    "dbname": os.getenv("PGDATABASE", "sinesp_ppe"),
+    "user": os.getenv("PGUSER", "sinesp"),
     "password": os.getenv("POSTGRES_PASSWORD", ""),
 }
 TABLE = os.getenv("POSTGRES_TABLE", "procedimento")

@@ -75,10 +75,10 @@ ingestão.
 2. Configure o `.env` na raiz com as variáveis do banco:
 
    ```env
-   POSTGRES_HOST=localhost
-   POSTGRES_PORT=5432
-   POSTGRES_DB=bi_nbcr
-   POSTGRES_USER=bi_nbcr
+   PGHOST=localhost
+   PGPORT=5432
+   PGDATABASE=bi_nbcr
+   PGUSER=bi_nbcr
    POSTGRES_PASSWORD=...
    ```
 
