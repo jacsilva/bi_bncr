@@ -7,7 +7,10 @@ dbt-core==1.9.*
 dbt-postgres==1.9.*
 
 # Databricks (Lakebase: token OAuth para o dbt)
-databricks-sdk
+# Pin de mínimo: a API w.database (Lakebase) só existe em versões recentes.
+# Sem isso, o Databricks Apps mantém o SDK antigo pré-instalado e quebra com
+# AttributeError: 'WorkspaceClient' object has no attribute 'database'.
+databricks-sdk>=0.117.0
 
 # API
 fastapi
