@@ -28,9 +28,10 @@ def _ensure_pgpassword():
         from databricks.sdk import WorkspaceClient
 
         w = WorkspaceClient()
+        # ✅ Usar PGDATABASE injetado pelo Lakebase (databricks-postgres com hífen)
         cred = w.database.generate_database_credential(
             request_id=str(uuid.uuid4()),
-            instance_names=[os.environ.get("PGDATABASE", "databricks-postgres")],
+            instance_names=[os.environ.get("PGDATABASE", "databricks-postgres")]
         )
         os.environ["PGPASSWORD"] = cred.token
         return
