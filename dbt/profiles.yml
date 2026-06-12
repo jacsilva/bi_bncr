@@ -1,6 +1,6 @@
 # Perfil de conexão do dbt. Lê as mesmas variáveis do .env do projeto.
 # Schema default = staging (conforme solicitado).
-bi_bnbo:
+bi_bncr:
   target: prod
   outputs:
     prod:
@@ -9,7 +9,7 @@ bi_bnbo:
       port: "{{ env_var('PGPORT') | int }}"
       user: "{{ env_var('PGUSER') }}"
       password: "{{ env_var('PGPASSWORD') }}"
-      dbname: "{{ env_var('PGDATABASE', 'databricks-postgres') }}"
+      dbname: "{{ env_var('PGDATABASE', 'databricks_postgres') }}"
       schema: "{{ env_var('DBT_SCHEMA', 'public') }}"
       threads: 4
       sslmode: require

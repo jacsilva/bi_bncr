@@ -9,6 +9,6 @@ resources:
       key: "api-key"
   - name: postgres
     postgres:
-      branch: projects/db-bi-bnbo/branches/production
-      database: projects/db-bi-bnbo/branches/production/databases/databricks-postgres
+      branch: projects/db-bi-bncr/branches/production
+      database: projects/db-bi-bncr/branches/production/databases/databricks_postgres
       permission: CAN_CONNECT_AND_CREATE

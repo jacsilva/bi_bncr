@@ -8,7 +8,7 @@ with origem as (
         id_procedimento,
         dados,
         importado_em
-    from {{ source('sinesp_ppe', 'procedimento') }}
+    from {{ source('bi_bncr', 'procedimento') }}
 
 )
 

@@ -12,7 +12,6 @@ Suporta dois modos:
 import os
 import time
 
-import requests
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker
 
@@ -26,35 +25,19 @@ _db = os.getenv("PGDATABASE")
 
 if _host and _user and _db:
     # --- Databricks Apps: autenticação via token OAuth (OIDC) ---
+    from src.databricks_auth import get_oauth_token
+
     DATABASE_URL = f"postgresql+psycopg2://{_user}:@{_host}:{_port}/{_db}"
     engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
     _token = None
     _last_refresh = 0
 
-    def _get_oauth_token():
-        """Get OAuth token from Databricks OIDC endpoint."""
-        db_host = os.environ["DATABRICKS_HOST"]
-        client_id = os.environ["DATABRICKS_CLIENT_ID"]
-        client_secret = os.environ["DATABRICKS_CLIENT_SECRET"]
-
-        resp = requests.post(
-            f"https://{db_host}/oidc/v1/token",
-            data={
-                "grant_type": "client_credentials",
-                "client_id": client_id,
-                "client_secret": client_secret,
-                "scope": "all-apis",
-            },
-        )
-        resp.raise_for_status()
-        return resp.json()["access_token"]
-
     @event.listens_for(engine, "do_connect")
     def provide_token(dialect, conn_rec, cargs, cparams):
         global _token, _last_refresh
         if _token is None or time.time() - _last_refresh > 900:
-            _token = _get_oauth_token()
+            _token = get_oauth_token()
             _last_refresh = time.time()
         cparams["password"] = _token
         cparams["sslmode"] = "require"
@@ -72,7 +55,7 @@ else:
         pg_pass = os.getenv("POSTGRES_PASSWORD", "")
         pg_host = os.getenv("PGHOST", "localhost")
         pg_port = os.getenv("PGPORT", "5432")
-        pg_db = os.getenv("PGDATABASE", "sinesp_ppe")
+        pg_db = os.getenv("PGDATABASE", "bi_bncr")
         DATABASE_URL = (
             f"postgresql+psycopg2://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}"
         )

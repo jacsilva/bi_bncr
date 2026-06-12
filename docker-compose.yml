@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: sinesp_ppe_postgres
+    container_name: bi_bncr_postgres
     restart: unless-stopped
     environment:
       PGDATABASE: ${PGDATABASE}

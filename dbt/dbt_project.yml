@@ -1,9 +1,9 @@
-name: 'sinesp_ppe'
+name: 'bi_bncr'
 version: '1.0.0'
 config-version: 2
 
 # Perfil de conexão (ver profiles.yml)
-profile: 'sinesp_ppe'
+profile: 'bi_bncr'
 
 model-paths: ["models"]
 target-path: "target"
@@ -12,7 +12,7 @@ clean-targets: ["target", "dbt_packages"]
 # Arquitetura medallion: cada camada em seu próprio schema, com prefixo de tabela.
 # staging/intermediate são views; a camada smart é materializada como tabela.
 models:
-  sinesp_ppe:
+  bi_bncr:
     staging:
       +schema: staging
       +materialized: view
@@ -25,7 +25,7 @@ models:
 
 # Seeds (dados de referência estáticos carregados via `dbt seed`).
 seeds:
-  sinesp_ppe:
+  bi_bncr:
     +schema: staging
     dim_uf:
       +column_types:

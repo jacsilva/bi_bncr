@@ -1,7 +1,6 @@
 """Execução dos modelos dbt (transformação medallion) após a carga no banco."""
 
 import os
-import uuid
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -25,23 +24,9 @@ def _ensure_pgpassword():
     # Ambiente Databricks Apps: o resource injeta as credenciais do service
     # principal (DATABRICKS_CLIENT_ID). Gera o token OAuth a cada execução.
     if os.environ.get("DATABRICKS_CLIENT_ID"):
-        import requests as _requests
+        from src.databricks_auth import get_oauth_token
 
-        db_host = os.environ["DATABRICKS_HOST"]
-        client_id = os.environ["DATABRICKS_CLIENT_ID"]
-        client_secret = os.environ["DATABRICKS_CLIENT_SECRET"]
-
-        resp = _requests.post(
-            f"https://{db_host}/oidc/v1/token",
-            data={
-                "grant_type": "client_credentials",
-                "client_id": client_id,
-                "client_secret": client_secret,
-                "scope": "all-apis",
-            },
-        )
-        resp.raise_for_status()
-        os.environ["PGPASSWORD"] = resp.json()["access_token"]
+        os.environ["PGPASSWORD"] = get_oauth_token()
         return
 
     # Local: usa senha estática do .env

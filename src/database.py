@@ -13,7 +13,7 @@ load_dotenv(BASE_DIR / ".env")
 PG_CONFIG = {
     "host": os.getenv("PGHOST", "localhost"),
     "port": os.getenv("PGPORT", "5432"),
-    "dbname": os.getenv("PGDATABASE", "sinesp_ppe"),
+    "dbname": os.getenv("PGDATABASE", "bi_bncr"),
     "user": os.getenv("PGUSER", "sinesp"),
     "password": os.getenv("POSTGRES_PASSWORD", ""),
 }

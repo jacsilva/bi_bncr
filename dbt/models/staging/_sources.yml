@@ -2,7 +2,7 @@ version: 2
 
 # Fonte bruta: tabela populada pelo pipeline Python (src/database.py).
 sources:
-  - name: sinesp_ppe
+  - name: bi_bncr
     schema: public
     tables:
       - name: procedimento
