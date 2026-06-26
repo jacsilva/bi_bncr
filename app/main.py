@@ -16,6 +16,7 @@ from app.routes import (
     retorno_abr_router,
     integracao_bncr_router,
     cadastro_router,
+    imei_consolidado_router,
     dbt_router,
 )
 
@@ -42,6 +43,7 @@ app.include_router(funil_imei_router, prefix="/api")
 app.include_router(retorno_abr_router, prefix="/api")
 app.include_router(integracao_bncr_router, prefix="/api")
 app.include_router(cadastro_router, prefix="/api")
+app.include_router(imei_consolidado_router, prefix="/api")
 app.include_router(dbt_router, prefix="/api")
 
 
